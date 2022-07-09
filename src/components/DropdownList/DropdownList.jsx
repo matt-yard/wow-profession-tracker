@@ -1,24 +1,37 @@
-import React from 'react'
-import "./DropdownList.css"
+import React, { useState } from 'react';
+import './DropdownList.css';
+import FontAwesome from 'react-fontawesome';
 
-export const DropdownList = ({ list }) => {
+export const DropdownList = ({ list, headerTitle }) => {
+  const [isListOpen, setIsListOpen] = useState(false);
 
-  if(list.length) {
+  const toggleList = () => {
+    setIsListOpen(!isListOpen);
+  };
+
+  if (list.length) {
     return (
-    <div>
-      <select className="Dropdown">
-      {
-        list.map(item => {
-          return (
-            <option key={item.id}>{item.name}</option>
-          )
-        })
-      }
-      </select>
-    </div>
-  )
+      <div className="dd-wrapper">
+        <button type="button" className="dd-header" onClick={toggleList}>
+          <div className="dd-header-title">{headerTitle}</div>
+          {isListOpen ? (
+            <FontAwesome name="angle-up" size="2x" />
+          ) : (
+            <FontAwesome name="angle-down" size="2x" />
+          )}
+        </button>
+        {isListOpen && (
+          <div role="list" className="dd-list">
+            {list.map((item) => (
+              <button type="button" className="dd-list-item" key={item.id}>
+                {item.title} {item.selected && <FontAwesome name="check" />}
+              </button>
+            ))}
+          </div>
+        )}
+      </div>
+    );
   } else {
-    return <div>Nothing to show</div>
+    return <div>Nothing to show</div>;
   }
-
-}
+};

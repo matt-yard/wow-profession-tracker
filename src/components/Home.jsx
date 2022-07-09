@@ -1,10 +1,10 @@
-import React from 'react'
-import {DropdownList} from "./DropdownList/DropdownList.jsx"
+import React from 'react';
+import { DropdownList } from './DropdownList/DropdownList.jsx';
 
-export const Home = ({professions}) => {
+export const Home = ({ professions }) => {
   return (
     <div>
-      <DropdownList list={professions} />
+      <DropdownList list={professions} headerTitle="Select a Profession" />
     </div>
-  )
-}
+  );
+};
