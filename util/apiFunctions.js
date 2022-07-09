@@ -232,6 +232,23 @@ const dummyRealms = [
   { name: 'Turalyon', id: 3685 },
 ];
 
+const exampleObj = {
+  craftedItem: 'Elixir of Something',
+  sellPrice: 100,
+  materials: [
+    {
+      name: 'Herb',
+      quantity: 5,
+      pricePer: 10,
+    },
+    {
+      name: 'Vial',
+      quantity: 1,
+      pricePer: 1,
+    },
+  ],
+};
+
 const professionBlackList = {
   Archaeology: true,
   'Soul Cyphering': true,
@@ -244,7 +261,6 @@ const professionBlackList = {
 export const fetchProfessions = async () => {
   if (dummyProfessions.length) {
     return dummyProfessions.filter((prof) => {
-      console.log(!professionBlackList[prof.name]);
       return !professionBlackList[prof.name];
     });
   }

@@ -12,6 +12,7 @@
 .list-container {
   height: 500px;
   width: 400px;
+  z-index: 2;
 }
 
 .icon {
@@ -38,6 +39,11 @@
 .dropdown-button {
   color: white;
   text-decoration: none;
+  font-size: 30px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  height: 50px;
 }
 
 .dd-button-container {
@@ -50,4 +56,25 @@
 .flex-row {
   display: flex;
   gap: 90px;
+}
+
+#go-btn {
+  height: 85px;
+  width: 150px;
+  padding: 15px;
+  font-size: 30px;
+  border-radius: 20px;
+  color: white;
+  background-color: #007acc;
+  border: none;
+}
+
+#go-btn:hover {
+  cursor: pointer;
+  background-color: #028ae4;
+}
+
+#go-btn:disabled {
+  background-color: gray;
+  cursor: not-allowed;
 }

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { DropdownList } from './DropdownList/DropdownList.jsx';
-
+import { IoIosArrowDown } from 'react-icons/io';
 export const Home = ({
   professions,
   selectedProfession,
@@ -27,6 +27,7 @@ export const Home = ({
             {props.selected.id
               ? `${props.selected.name}`
               : `Choose ${props.menuName}`}
+            <IoIosArrowDown />
           </a>
           {open && props.children}
         </div>
@@ -65,6 +66,12 @@ export const Home = ({
           open={openRealms}
         />
       </DropdownButton>
+      <button
+        id="go-btn"
+        disabled={!(selectedRealm.id && selectedProfession.id)}
+      >
+        Go
+      </button>
     </div>
   );
 };

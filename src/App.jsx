@@ -24,21 +24,36 @@ function App() {
   }, []);
   return (
     <div className="app">
-      <Routes>
-        <Route
-          path="/"
-          element={
-            <Home
-              professions={professions}
-              setSelectedProfession={setSelectedProfession}
-              selectedProfession={selectedProfession}
-              realms={realms}
-              setSelectedRealm={setSelectedRealm}
-              selectedRealm={selectedRealm}
-            />
-          }
-        />
-      </Routes>
+      <div className="home-container">
+        <h1>WoW Profit Calculator</h1>
+        <p>
+          Choose your profession and realm to find the most profitable* items to
+          craft!
+        </p>
+        <Routes>
+          <Route
+            path="/"
+            element={
+              <Home
+                professions={professions}
+                setSelectedProfession={setSelectedProfession}
+                selectedProfession={selectedProfession}
+                realms={realms}
+                setSelectedRealm={setSelectedRealm}
+                selectedRealm={selectedRealm}
+              />
+            }
+          />
+        </Routes>
+        <p id="disclaimer">
+          <em>
+            Note: The strategy used for calculating profit is based off of
+            buying raw materials at market price, and crafting them into items
+            to resell on the Auction House. Auction House prices are updated
+            every hour, so they may not be 100% accurate.
+          </em>
+        </p>
+      </div>
     </div>
   );
 }
