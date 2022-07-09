@@ -171,19 +171,105 @@ const dummyProfessions = [
   },
 ];
 
+const dummyRealms = [
+  { name: 'Stormrage', id: 60 },
+  { name: "Zul'jin", id: 61 },
+  { name: 'Durotan', id: 63 },
+  { name: 'Ysera', id: 63 },
+  { name: 'Bloodhoof', id: 64 },
+  { name: 'Duskwood', id: 64 },
+  { name: 'Elune', id: 67 },
+  { name: 'Laughing Skull', id: 67 },
+  { name: 'Auchindoun', id: 67 },
+  { name: "Cho'gall", id: 67 },
+  { name: 'Gilneas', id: 67 },
+  { name: 'Arthas', id: 69 },
+  { name: 'Warsong', id: 71 },
+  { name: 'Gorgonnash', id: 71 },
+  { name: 'The Forgotten Coast', id: 71 },
+  { name: 'Balnazzar', id: 71 },
+  { name: 'Alterac Mountains', id: 71 },
+  { name: 'Undermine', id: 71 },
+  { name: 'Anvilmar', id: 71 },
+  { name: 'Bleeding Hollow', id: 73 },
+  { name: 'Argent Dawn', id: 75 },
+  { name: 'The Scryers', id: 75 },
+  { name: 'Magtheridon', id: 78 },
+  { name: 'Anetheron', id: 78 },
+  { name: 'Ysondre', id: 78 },
+  { name: 'Altar of Storms', id: 78 },
+  { name: 'Eonar', id: 96 },
+  { name: 'Skullcrusher', id: 96 },
+  { name: "Gul'dan", id: 96 },
+  { name: 'Zuluhed', id: 96 },
+  { name: 'Ursin', id: 96 },
+  { name: 'Andorhal', id: 96 },
+  { name: 'Black Dragonflight', id: 96 },
+  { name: 'Velen', id: 96 },
+  { name: 'Scilla', id: 96 },
+  { name: 'Llane', id: 99 },
+  { name: 'Arygos', id: 99 },
+  { name: 'Earthen Ring', id: 100 },
+  { name: 'Firetree', id: 127 },
+  { name: "Drak'Tharon", id: 127 },
+  { name: 'Rivendare', id: 127 },
+  { name: 'Vashj', id: 127 },
+  { name: 'Spirestone', id: 127 },
+  { name: 'Malorne', id: 127 },
+  { name: 'Frostwolf', id: 127 },
+  { name: 'Stormscale', id: 127 },
+  { name: 'Trollbane', id: 1175 },
+  { name: 'Grizzly Hills', id: 1175 },
+  { name: 'Malfurion', id: 1175 },
+  { name: 'Lothar', id: 1175 },
+  { name: "Kael'thas", id: 1175 },
+  { name: 'Gnomeregan', id: 1175 },
+  { name: 'Moonrunner', id: 1175 },
+  { name: 'Ghostlands', id: 1175 },
+  { name: 'Area 52', id: 3676 },
+  { name: 'Thrall', id: 3678 },
+  { name: 'Dalaran', id: 3683 },
+  { name: 'Turalyon', id: 3685 },
+];
+
+const professionBlackList = {
+  Archaeology: true,
+  'Soul Cyphering': true,
+  'Stygia Crafting': true,
+  'Abominable Stitching': true,
+  'Ascension Crafting': true,
+  'Protoform Synthesis': true,
+};
+
 export const fetchProfessions = async () => {
   if (dummyProfessions.length) {
-    return dummyProfessions;
+    return dummyProfessions.filter((prof) => {
+      console.log(!professionBlackList[prof.name]);
+      return !professionBlackList[prof.name];
+    });
   }
   const { data } = await axios.get('/api/professions');
   let professions = await Promise.all(
     data.professions.map((item) => fetchProfessionIcon(item))
   );
-  return professions;
+
+  let filteredProfessions = professions.filter((prof) => {
+    console.log(!professionBlackList[prof.name]);
+    return !professionBlackList[prof.name];
+  });
+  return filteredProfessions;
 };
 
 const fetchProfessionIcon = async (item) => {
   const { data } = await axios.get(`/api/professions/${item.id}/icon`);
   item.iconUrl = data.assets[0].value;
   return item;
+};
+
+export const fetchRealms = async () => {
+  if (dummyRealms.length) {
+    return dummyRealms;
+  }
+  const { data } = await axios.get('/api/realms');
+  return data;
 };

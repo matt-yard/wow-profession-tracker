@@ -34,6 +34,28 @@ router.get('/professions/:id/icon', async (req, res, next) => {
   }
 });
 
+router.get('/realms', async (req, res, next) => {
+  try {
+    const {
+      token: { access_token },
+    } = await client.getToken();
+    const { data } = await axios.get(
+      `https://us.api.blizzard.com/data/wow/search/connected-realm?namespace=dynamic-us&status.type=UP&realms.timezone=America%2FNew_York&orderby=id&_page=1&access_token=${access_token}`
+    );
+
+    const realms = [];
+    for (const result of data.results) {
+      for (const realm of result.data.realms) {
+        realms.push({ name: realm.name.en_US, id: result.data.id });
+      }
+    }
+
+    res.send(realms);
+  } catch (error) {
+    next(error);
+  }
+});
+
 router.use((req, res, next) => {
   const error = new Error('Not Found');
   error.status = 404;
