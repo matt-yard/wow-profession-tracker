@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from "react"
-import {Home} from "./components/Home.js"
+import {Home} from "./components/Home.jsx"
 import {Routes, Route} from "react-router-dom"
 import {fetchProfessions} from "../util/apiFunctions.js"
 import "./App.css"
@@ -16,7 +16,7 @@ function App() {
     initialLoad()
   }, [])
   return (
-    <div className="App">
+    <div className="app">
       <Routes>
         <Route path="/" element={<Home professions={professions} />} />
       </Routes>

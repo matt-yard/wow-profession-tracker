@@ -1,11 +1,12 @@
 import React from 'react'
+import "./DropdownList.css"
 
 export const DropdownList = ({ list }) => {
 
   if(list.length) {
     return (
     <div>
-      <select>
+      <select className="Dropdown">
       {
         list.map(item => {
           return (
